@@ -350,13 +350,13 @@
   display: flex;
   justify-content: space-around;
   height: 40px;
-  width: 130px;
   margin-left: 16px;
   border-radius: 5px;
 }
 
 .spanTag {
   font-size: 22px;
+  margin: 10px;
 }
 
 .tag-ingredient {
