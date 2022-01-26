@@ -50,3 +50,63 @@ function displayMessageNoRecipes() {
     }
   }
 }
+
+export function filterDevice() {
+  let inputSearch = document.getElementById("input-device");
+  let listBoxLi = document.getElementsByClassName("listbox");
+  inputSearch.addEventListener("keyup", () => {
+    if (inputSearch.value.length >= 3) {
+      for (let index = 0; index < listBoxLi.length; index++) {
+        if (
+          !listBoxLi[index].innerHTML.toLowerCase().includes(inputSearch.value)
+        ) {
+          listBoxLi[index].style.display = "none";
+        } else {
+          listBoxLi[index].style.display = "list-item";
+        }
+      }
+    }
+  });
+}
+
+export function filterIngredient() {
+  let inputSearch = document.getElementById("input-ingredients");
+  let listBoxLi = document.getElementsByClassName("listbox");
+  console.log("ft", document.getElementsByClassName("listbox"));
+  inputSearch.addEventListener("keyup", () => {
+    if (inputSearch.value.length >= 3) {
+      for (let index = 0; index < listBoxLi.length; index++) {
+        if (
+          !listBoxLi[index].innerHTML.toLowerCase().includes(inputSearch.value)
+        ) {
+          listBoxLi[index].style.display = "none";
+        } else {
+          listBoxLi[index].style.display = "list-item";
+        }
+      }
+    }
+  });
+}
+
+let inputSearchUtensils = document.getElementById("input-utensils");
+
+export function filterUtensil() {
+  // Quand je fais une recherche dans le dropdown, ça me laisse la liste correspondante
+  let listBoxLi = document.getElementsByClassName("listbox");
+  console.log("lp", listBoxLi);
+  inputSearchUtensils.addEventListener("keyup", () => {
+    if (inputSearchUtensils.value.length >= 3) {
+      for (let index = 0; index < listBoxLi.length; index++) {
+        if (
+          !listBoxLi[index].innerHTML
+            .toLowerCase()
+            .includes(inputSearchUtensils.value)
+        ) {
+          listBoxLi[index].style.display = "none";
+        } else {
+          listBoxLi[index].style.display = "list-item";
+        }
+      }
+    }
+  });
+}
