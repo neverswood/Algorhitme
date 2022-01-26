@@ -334,3 +334,7 @@
 .listbox {
   display: list-item;
 }
+
+#message {
+  display: none;
+}
