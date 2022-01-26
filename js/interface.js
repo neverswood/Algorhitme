@@ -34,3 +34,27 @@ export function displayRecipes(recipe) {
   containerRecipe.appendChild(containerDiv);
   containerDiv.innerHTML = templateRecipe;
 }
+
+export function getItemUtensil(utensils) {
+  let item = "";
+  for (let index = 0; index < utensils.length; index++) {
+    item += `<li class="listbox">${utensils[index]}</li>`;
+  }
+  return item;
+}
+
+export function getItemIngredient(ingredient) {
+  let item = "";
+  for (let index = 0; index < ingredient.length; index++) {
+    item += `<li class="listbox">${ingredient[index]}</li>`;
+  }
+  return item;
+}
+
+export function getItemDevice(devices) {
+  let item = "";
+  for (let index = 0; index < devices.length; index++) {
+    item += `<li class="listbox">${devices[index]}</li>`;
+  }
+  return item;
+}
