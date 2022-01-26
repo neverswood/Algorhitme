@@ -1,5 +1,6 @@
 import { recipes } from "./data/recipes.js";
 import { getItemDevice } from "./interface.js";
+import { filterTagDevice } from "./tags.js";
 
 function getDevice() {
   let deviceByRecipes = [];
@@ -25,6 +26,7 @@ export function dropdownDevices() {
     document.getElementById("listbox-nameDevice").style.display = "none";
     document.getElementById("dropdownDevice").style.width = "667px";
     listBox.innerHTML = `<ul>${getItemDevice(devices)}</ul>`;
+    filterTagDevice();
   });
   chevron.addEventListener("click", (e) => {
     dropdownDeviceIsClosed = true;

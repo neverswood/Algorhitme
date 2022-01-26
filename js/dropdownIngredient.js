@@ -1,5 +1,6 @@
 import { recipes } from "./data/recipes.js";
 import { getItemIngredient } from "./interface.js";
+import { filterTagIngredient } from "./tags.js";
 
 function getIngredients() {
   let ingredientByRecipes = [];
@@ -25,6 +26,7 @@ export function dropdownIngredients() {
     document.getElementById("listbox-nameIngredient").style.display = "none";
     document.getElementById("dropdownIngredients").style.width = "667px";
     listBox.innerHTML = `<ul>${getItemIngredient(ingredients)}</ul>`;
+    filterTagIngredient();
   });
   chevron.addEventListener("click", () => {
     dropdownIngredientsIsClosed = true;

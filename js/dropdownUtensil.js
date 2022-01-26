@@ -1,5 +1,6 @@
 import { recipes } from "./data/recipes.js";
 import { getItemUtensil } from "./interface.js";
+import { filterTagUtensil } from "./tags.js";
 
 export function getUtensils() {
   let ustensilsByRecipes = [];
@@ -24,6 +25,7 @@ export function dropdownUtensils() {
     document.getElementById("listbox-nameUtensils").style.display = "none";
     document.getElementById("dropdownUtensils").style.width = "667px";
     listBox.innerHTML = `<ul id="listboxUl">${getItemUtensil(utensils)}</ul>`;
+    filterTagUtensil();
   });
   chevron.addEventListener("click", (e) => {
     dropdownUtensilsIsClosed = true;

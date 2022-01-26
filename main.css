@@ -338,3 +338,35 @@
 #message {
   display: none;
 }
+
+#tag {
+  display: flex;
+}
+.tag {
+  padding: 10px;
+  color: white;
+  align-items: center;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-around;
+  height: 40px;
+  width: 130px;
+  margin-left: 16px;
+  border-radius: 5px;
+}
+
+.spanTag {
+  font-size: 22px;
+}
+
+.tag-ingredient {
+  background-color: rgb(35, 119, 245);
+}
+
+.tag-device {
+  background-color: rgb(151, 229, 151);
+}
+
+.tag-utensil {
+  background-color: tomato;
+}
