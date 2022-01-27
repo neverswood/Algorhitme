@@ -13,6 +13,7 @@ export function keyWord() {
     if (inputSearch.value.length < 3) {
       for (let index = 0; index < item.length; index++) {
         item[index].style.display = "block";
+        document.getElementById("message").style.display = "none";
       }
     } else {
       for (let index = 0; index < recipes.length; index++) {
@@ -38,24 +39,16 @@ export function keyWord() {
         ) {
           item[index].style.display = "none";
         }
-
-        //inputSearch.value = "";
+        if (
+          nameRecipeExist !== undefined &&
+          descriptionRecipeExist !== undefined &&
+          ingredientRecipeExist !== undefined
+        ) {
+          document.getElementById("message").style.display = "block";
+        }
       }
     }
   });
-}
-
-displayMessageNoRecipes();
-
-function displayMessageNoRecipes() {
-  for (let a = 0; a < item.length; a++) {
-    console.log("mes", item[a].size === 0);
-    if (item[a].size === 0) {
-      document.getElementById("message").style.display = "block";
-    } else if (item[a].size > 0) {
-      document.getElementById("message").style.display = "none";
-    }
-  }
 }
 
 export function filterDevice() {
