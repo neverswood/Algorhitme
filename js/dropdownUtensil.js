@@ -1,4 +1,9 @@
 import { recipes } from "./data/recipes.js";
+import {
+  closeDropdownDevice,
+  closeDropdownIngredient,
+  closeDropdownUtensil,
+} from "./dropdown.js";
 import { getItemUtensil } from "./interface.js";
 import { filterTagUtensil } from "./tags.js";
 
@@ -14,11 +19,15 @@ export function getUtensils() {
 
 var dropdownUtensilsIsClosed = true;
 
-export function dropdownUtensils() {
+export function dropdownUtensils(e) {
   const dropdownUtensils = document.getElementById("listbox-nameUtensils");
   const chevron = document.getElementById("chevron3");
   const listBox = document.getElementById("listbox-utensils");
   dropdownUtensils.addEventListener("click", (e) => {
+    if (e.target) {
+      closeDropdownDevice();
+      closeDropdownIngredient();
+    }
     dropdownUtensilsIsClosed = false;
     const utensils = getUtensils();
     document.getElementById("search-utensils").style.display = "block";
@@ -29,8 +38,7 @@ export function dropdownUtensils() {
   });
   chevron.addEventListener("click", (e) => {
     dropdownUtensilsIsClosed = true;
-    document.getElementById("search-utensils").style.display = "none";
-    document.getElementById("listbox-nameUtensils").style.display = "flex";
+    closeDropdownUtensil();
     listBox.innerHTML = "";
   });
 }

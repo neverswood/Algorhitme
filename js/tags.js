@@ -57,7 +57,6 @@ export function filterTagDevice(e) {
       let spanTag = document.createElement("span");
       spanTag.setAttribute("class", "spanTag");
       divTag.innerHTML = event.target.textContent;
-      tripartag(event.target.textContent);
       spanTag.innerHTML = `<i class="far fa-times-circle circle"></i>`;
       tag.appendChild(divTag);
       divTag.appendChild(spanTag);

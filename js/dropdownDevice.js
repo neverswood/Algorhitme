@@ -1,4 +1,9 @@
 import { recipes } from "./data/recipes.js";
+import {
+  closeDropdownDevice,
+  closeDropdownIngredient,
+  closeDropdownUtensil,
+} from "./dropdown.js";
 import { getItemDevice } from "./interface.js";
 import { filterTagDevice } from "./tags.js";
 
@@ -19,8 +24,16 @@ export function dropdownDevices() {
   const chevron = document.getElementById("chevron2");
   const listBox = document.getElementById("listbox-devices");
   const searchDevice = document.getElementById("search-device");
+  let searchDropdown = document.querySelectorAll(".search-dropdown");
+  let dropdownButton = document.querySelectorAll(".dropdown-listbox__name");
+
   dropdownDevices.addEventListener("click", (e) => {
     searchDevice.style.display = "block";
+    console.log("oijoijoij", e.target);
+    if (e.target) {
+      closeDropdownUtensil();
+      closeDropdownIngredient();
+    }
     dropdownDeviceIsClosed = false;
     const devices = [...new Set(getDevice())];
     document.getElementById("listbox-nameDevice").style.display = "none";
@@ -30,8 +43,7 @@ export function dropdownDevices() {
   });
   chevron.addEventListener("click", (e) => {
     dropdownDeviceIsClosed = true;
-    document.getElementById("search-device").style.display = "none";
-    document.getElementById("listbox-nameDevice").style.display = "flex";
+    closeDropdownDevice();
     listBox.innerHTML = "";
   });
 }
