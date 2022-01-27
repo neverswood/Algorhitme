@@ -1,13 +1,20 @@
 import { recipes } from "./data/recipes.js";
+import { displayRecipes } from "./interface.js";
 
 let item = document.getElementsByClassName("col-md-4");
+let containerItem = document.querySelectorAll(".container-item__recipe");
 
 export function keyWord() {
   let inputSearch = document.getElementById("searchbar");
   let listBoxLi = document.getElementsByClassName("listbox");
 
   inputSearch.addEventListener("keyup", () => {
-    if (inputSearch.value.length >= 3) {
+    console.log("length", inputSearch.value.length);
+    if (inputSearch.value.length < 3) {
+      for (let index = 0; index < item.length; index++) {
+        item[index].style.display = "block";
+      }
+    } else {
       for (let index = 0; index < recipes.length; index++) {
         const lesingredients = recipes[index].ingredients;
         for (let i = 0; i < lesingredients.length; i++) {
@@ -21,31 +28,31 @@ export function keyWord() {
         const descriptionRecipeExist = recipes[index].description
           .toLowerCase()
           .indexOf(inputSearch.value.toLowerCase());
+        console.log(nameRecipeExist == -1);
+        console.log("val", nameRecipeExist == undefined);
+
         if (
           nameRecipeExist == -1 &&
           descriptionRecipeExist == -1 &&
           ingredientRecipeExist == -1
         ) {
           item[index].style.display = "none";
-        } else if (
-          nameRecipeExist > -1 &&
-          descriptionRecipeExist > -1 &&
-          ingredientRecipeExist > -1
-        ) {
-          item[index].style.display = "block";
         }
+
+        //inputSearch.value = "";
       }
-      displayMessageNoRecipes();
     }
   });
 }
 
+displayMessageNoRecipes();
+
 function displayMessageNoRecipes() {
   for (let a = 0; a < item.length; a++) {
-    console.log("mes", item[a].style.display == "none");
-    if (item[a].style.display == "none") {
+    console.log("mes", item[a].size === 0);
+    if (item[a].size === 0) {
       document.getElementById("message").style.display = "block";
-    } else if (item[a].style.display == "block") {
+    } else if (item[a].size > 0) {
       document.getElementById("message").style.display = "none";
     }
   }
