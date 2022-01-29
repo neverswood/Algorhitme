@@ -1,5 +1,7 @@
 import { recipes } from "./data/recipes.js";
 
+let item = document.getElementsByClassName("col-md-4");
+
 export function filterTagUtensil() {
   // quand je clic sur un element de la liste il s'affiche en tag
   let listBox = document.getElementById("listbox-utensils");
@@ -44,8 +46,8 @@ export function filterTagIngredient() {
   }
 }
 
-export function filterTagDevice(e) {
-  // quand je clic sur un element de la liste il s'affiche en tag
+export function filterTagDevice() {
+  // quand je clic sur un element de la liste il s'affiche en tag et rie les recettes
   let listBox = document.getElementById("listbox-devices");
   let listBoxLi = document.getElementsByClassName("listbox");
   let list = listBox.querySelectorAll("li");
@@ -61,9 +63,41 @@ export function filterTagDevice(e) {
       tag.appendChild(divTag);
       divTag.appendChild(spanTag);
       console.log("target", event.target.textContent);
+      //filterRecipes();
+      for (let index = 0; index < recipes.length; index++) {
+        const lesingredients = recipes[index].ingredients;
+        for (let i = 0; i < lesingredients.length; i++) {
+          var ingredientRecipeExist = lesingredients[i].ingredient
+            .toLowerCase()
+            .indexOf(event.target.textContent);
+        }
+        const nameRecipeExist = recipes[index].name
+          .toLowerCase()
+          .indexOf(event.target.textContent);
+        const descriptionRecipeExist = recipes[index].description
+          .toLowerCase()
+          .indexOf(event.target.textContent);
+        console.log("tagtarget", event.target.textContent);
+        console.log("tagtarget", event.target.textContent.toLowerCase());
+
+        console.log("blop", descriptionRecipeExist);
+        console.log("val", nameRecipeExist == undefined);
+
+        if (
+          nameRecipeExist == -1 &&
+          descriptionRecipeExist == -1 &&
+          ingredientRecipeExist == -1
+        ) {
+          item[index].style.display = "none";
+        }
+      }
+
       closeTag();
 
-      for (let index = 0; index < recipes.length; index++) {
+      // list[index].style.display = "none";
+      //enleve les li qui ne sont pas dans les recettes restante
+
+      /* for (let index = 0; index < recipes.length; index++) {
         const lesingredients = recipes[index].ingredients;
         for (let i = 0; i < lesingredients.length; i++) {
           console.log("bobyhou", event.target.textContent);
@@ -91,7 +125,7 @@ export function filterTagDevice(e) {
             "Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.";
           containerItem.appendChild(message);
         }
-      }
+      }*/
     });
   }
 }

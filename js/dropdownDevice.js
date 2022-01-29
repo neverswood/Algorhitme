@@ -38,7 +38,7 @@ export function dropdownDevices() {
     const devices = [...new Set(getDevice())];
     document.getElementById("listbox-nameDevice").style.display = "none";
     document.getElementById("dropdownDevice").style.width = "667px";
-    listBox.innerHTML = `<ul>${getItemDevice(devices)}</ul>`;
+    listBox.innerHTML = `<ul>${getItemDevice(devices).toLowerCase()}</ul>`;
     filterTagDevice();
   });
   chevron.addEventListener("click", (e) => {

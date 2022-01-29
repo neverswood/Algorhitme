@@ -20,6 +20,7 @@ function index() {
   filterUtensil();
   filterDevice();
   filterIngredient();
+  //filterRecipesBuyTag();
   //closeDropdownInactive();
 }
 

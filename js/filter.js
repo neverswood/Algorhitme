@@ -1,4 +1,7 @@
 import { recipes } from "./data/recipes.js";
+import { dropdownIngredients } from "./dropdownIngredient.js";
+import { dropdownUtensils } from "./dropdownUtensil.js";
+import { dropdownDevices } from "./dropdownDevice.js";
 import { displayRecipes } from "./interface.js";
 
 let item = document.getElementsByClassName("col-md-4");
@@ -6,7 +9,7 @@ let containerItem = document.querySelectorAll(".container-item__recipe");
 
 export function keyWord() {
   let inputSearch = document.getElementById("searchbar");
-  let listBoxLi = document.getElementsByClassName("listbox");
+  let listBox = document.querySelectorAll(".listbox");
 
   inputSearch.addEventListener("keyup", () => {
     console.log("length", inputSearch.value.length);
@@ -29,7 +32,7 @@ export function keyWord() {
         const descriptionRecipeExist = recipes[index].description
           .toLowerCase()
           .indexOf(inputSearch.value.toLowerCase());
-        console.log(nameRecipeExist == -1);
+        console.log(nameRecipeExist);
         console.log("val", nameRecipeExist == undefined);
 
         if (
@@ -38,6 +41,12 @@ export function keyWord() {
           ingredientRecipeExist == -1
         ) {
           item[index].style.display = "none";
+          console.log("list", listBox);
+          //listBox[index].style.display = "none";
+        } else {
+          dropdownDevices();
+          dropdownIngredients();
+          dropdownUtensils();
         }
         if (
           nameRecipeExist !== undefined &&
@@ -110,3 +119,7 @@ export function filterUtensil() {
     }
   });
 }
+
+//filtre recette par tag
+let tags = document.querySelectorAll(".tag");
+console.log(document.querySelectorAll(".tag"));
