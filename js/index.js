@@ -1,5 +1,5 @@
 import { recipes } from "./data/recipes.js";
-import { displayRecipes } from "./interface.js";
+import { displayRecipes, displayTags } from "./interface.js";
 import {
   displayDevicesDropdown,
   bindDevicesDropdownEventListeners,
@@ -26,7 +26,7 @@ function index() {
 
   displayRecipes(app.filteredRecipes);
   bindDevicesDropdownEventListeners(app);
-
+  bindRemoveTagEventListener(app);
   dropdownUtensils();
   dropdownIngredients();
   keyWord(app);
@@ -38,3 +38,13 @@ function index() {
 }
 
 index();
+
+function bindRemoveTagEventListener(app) {
+  let tag = document.getElementById("tag");
+  tag.addEventListener("click", (e) => {
+    if (!e.target.matches(".tag *")) {
+      return;
+    }
+    app.toggleTag(e.target.closest(".tag").dataset["tag"]);
+  });
+}

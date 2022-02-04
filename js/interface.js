@@ -66,3 +66,25 @@ export function renderIngredientsDropdown(ingredients) {
 export function renderDevicesDropdown(devices) {
   return renderDropdownList(devices);
 }
+
+export function renderTag(tag) {
+  return `
+  <div class="tag tag-device" data-tag="${tag}">
+    ${tag}
+    <span class="spanTag" ><i class="far fa-times-circle circle"></i></span>
+  </div>
+  `;
+}
+
+export function renderTags(tags) {
+  let result = "";
+  for (let tagsIndex = 0; tagsIndex < tags.length; ++tagsIndex) {
+    result += renderTag(tags[tagsIndex]);
+  }
+  return result;
+}
+
+export function displayTags(tags) {
+  const tag = document.getElementById("tag");
+  tag.innerHTML = renderTags(tags);
+}

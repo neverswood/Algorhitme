@@ -4,15 +4,8 @@ import { getDevices } from "./dropdownDevice.js";
 
 export function keyWord(app) {
   let inputSearch = document.getElementById("searchbar");
-
   inputSearch.addEventListener("keyup", () => {
-    console.log("length", inputSearch.value.length);
-    if (inputSearch.value.length < 3) {
-      app.filteredRecipes = recipes;
-    } else {
-      app.filteredRecipes = filterRecipesByKeyword(inputSearch.value);
-    }
-    displayRecipes(app.filteredRecipes);
+    app.setKeyword(inputSearch.value);
   });
 }
 
@@ -71,38 +64,4 @@ export function filterUtensil() {
       }
     }
   });
-}
-
-function filterRecipesByKeyword(keyword) {
-  let results = [];
-  for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
-    const lesingredients = recipes[recipesIndex].ingredients;
-    let ingredientMatchKeyword = false;
-    for (
-      let ingredientsIndex = 0;
-      ingredientsIndex < lesingredients.length;
-      ingredientsIndex++
-    ) {
-      if (
-        lesingredients[ingredientsIndex].ingredient
-          .toLowerCase()
-          .indexOf(keyword.toLowerCase()) !== -1
-      ) {
-        ingredientMatchKeyword = true;
-      }
-    }
-    const nameMatchKeyword =
-      recipes[recipesIndex].name
-        .toLowerCase()
-        .indexOf(keyword.toLowerCase()) !== -1;
-    const descriptionMatchKeyword =
-      recipes[recipesIndex].description
-        .toLowerCase()
-        .indexOf(keyword.toLowerCase()) !== -1;
-
-    if (ingredientMatchKeyword || nameMatchKeyword || descriptionMatchKeyword) {
-      results.push(recipes[recipesIndex]);
-    }
-  }
-  return results;
 }

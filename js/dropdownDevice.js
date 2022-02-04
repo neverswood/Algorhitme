@@ -1,6 +1,5 @@
 import { closeDropdownDevice } from "./dropdown.js";
-import { renderDevicesDropdown } from "./interface.js";
-import { filterTagDevice } from "./tags.js";
+import { displayTags, renderDevicesDropdown, renderTag } from "./interface.js";
 
 export function getDevices(recipes) {
   let deviceByRecipes = [];
@@ -25,13 +24,21 @@ export function displayDevicesDropdown(devices) {
 export function bindDevicesDropdownEventListeners(app) {
   const dropdownDevices = document.getElementById("listbox-nameDevice");
   const chevron = document.getElementById("chevron2");
+  const listBox = document.getElementById("listbox-devices");
+
   dropdownDevices.addEventListener("click", (e) => {
     const devices = getDevices(app.filteredRecipes);
     displayDevicesDropdown(devices);
-
-    filterTagDevice();
   });
   chevron.addEventListener("click", (e) => {
+    closeDropdownDevice();
+  });
+  listBox.addEventListener("click", (e) => {
+    if (!e.target.matches("li")) {
+      return;
+    }
+    app.toggleTag(e.target.textContent, "device");
+
     closeDropdownDevice();
   });
 }
