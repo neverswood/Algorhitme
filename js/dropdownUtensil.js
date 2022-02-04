@@ -4,7 +4,7 @@ import {
   closeDropdownIngredient,
   closeDropdownUtensil,
 } from "./dropdown.js";
-import { getItemUtensil } from "./interface.js";
+import { renderUtensilsDropdown } from "./interface.js";
 import { filterTagUtensil } from "./tags.js";
 
 export function getUtensils() {
@@ -33,7 +33,7 @@ export function dropdownUtensils(e) {
     document.getElementById("search-utensils").style.display = "block";
     document.getElementById("listbox-nameUtensils").style.display = "none";
     document.getElementById("dropdownUtensils").style.width = "667px";
-    listBox.innerHTML = `<ul id="listboxUl">${getItemUtensil(utensils)}</ul>`;
+    listBox.innerHTML = renderUtensilsDropdown(utensils);
     filterTagUtensil();
   });
   chevron.addEventListener("click", (e) => {

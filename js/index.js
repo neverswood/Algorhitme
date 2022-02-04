@@ -7,12 +7,12 @@ import { keyWord } from "./filter.js";
 import { filterUtensil } from "./filter.js";
 import { filterDevice } from "./filter.js";
 import { filterIngredient } from "./filter.js";
+
 //import { closeDropdownInactive } from "./dropdown.js";
 
 function index() {
-  for (let index = 0; index < recipes.length; index++) {
-    displayRecipes(recipes[index]);
-  }
+  displayRecipes(recipes);
+
   dropdownUtensils();
   dropdownDevices();
   dropdownIngredients();

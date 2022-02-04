@@ -1,61 +1,17 @@
 import { recipes } from "./data/recipes.js";
-import { dropdownIngredients } from "./dropdownIngredient.js";
-import { dropdownUtensils } from "./dropdownUtensil.js";
-import { dropdownDevices } from "./dropdownDevice.js";
 import { displayRecipes } from "./interface.js";
-
-let item = document.getElementsByClassName("col-md-4");
-let containerItem = document.querySelectorAll(".container-item__recipe");
+import { getDevices } from "./dropdownDevice.js";
 
 export function keyWord() {
   let inputSearch = document.getElementById("searchbar");
-  let listBox = document.querySelectorAll(".listbox");
 
   inputSearch.addEventListener("keyup", () => {
     console.log("length", inputSearch.value.length);
     if (inputSearch.value.length < 3) {
-      for (let index = 0; index < item.length; index++) {
-        item[index].style.display = "block";
-        document.getElementById("message").style.display = "none";
-      }
+      displayRecipes(recipes);
     } else {
-      for (let index = 0; index < recipes.length; index++) {
-        const lesingredients = recipes[index].ingredients;
-        for (let i = 0; i < lesingredients.length; i++) {
-          var ingredientRecipeExist = lesingredients[i].ingredient
-            .toLowerCase()
-            .indexOf(inputSearch.value.toLowerCase());
-        }
-        const nameRecipeExist = recipes[index].name
-          .toLowerCase()
-          .indexOf(inputSearch.value.toLowerCase());
-        const descriptionRecipeExist = recipes[index].description
-          .toLowerCase()
-          .indexOf(inputSearch.value.toLowerCase());
-        console.log(nameRecipeExist);
-        console.log("val", nameRecipeExist == undefined);
-
-        if (
-          nameRecipeExist == -1 &&
-          descriptionRecipeExist == -1 &&
-          ingredientRecipeExist == -1
-        ) {
-          item[index].style.display = "none";
-          console.log("list", listBox);
-          //listBox[index].style.display = "none";
-        } else {
-          dropdownDevices();
-          dropdownIngredients();
-          dropdownUtensils();
-        }
-        if (
-          nameRecipeExist !== undefined &&
-          descriptionRecipeExist !== undefined &&
-          ingredientRecipeExist !== undefined
-        ) {
-          document.getElementById("message").style.display = "block";
-        }
-      }
+      const filteredRecipes = filterRecipesByKeyword(inputSearch.value);
+      displayRecipes(filteredRecipes);
     }
   });
 }
@@ -81,7 +37,6 @@ export function filterDevice() {
 export function filterIngredient() {
   let inputSearch = document.getElementById("input-ingredients");
   let listBoxLi = document.getElementsByClassName("listbox");
-  console.log("ft", document.getElementsByClassName("listbox"));
   inputSearch.addEventListener("keyup", () => {
     if (inputSearch.value.length >= 3) {
       for (let index = 0; index < listBoxLi.length; index++) {
@@ -100,9 +55,7 @@ export function filterIngredient() {
 let inputSearchUtensils = document.getElementById("input-utensils");
 
 export function filterUtensil() {
-  // Quand je fais une recherche dans le dropdown, ça me laisse la liste correspondante
   let listBoxLi = document.getElementsByClassName("listbox");
-  console.log("lp", listBoxLi);
   inputSearchUtensils.addEventListener("keyup", () => {
     if (inputSearchUtensils.value.length >= 3) {
       for (let index = 0; index < listBoxLi.length; index++) {
@@ -121,5 +74,54 @@ export function filterUtensil() {
 }
 
 //filtre recette par tag
-let tags = document.querySelectorAll(".tag");
-console.log(document.querySelectorAll(".tag"));
+
+export function filterDevicesByRecipes() {
+  const devices = [...new Set(getDevices())];
+  let results = [];
+  for (let index = 0; index < devices.length; index++) {
+    let applianceRecipeExist = false;
+    for (let recipesIndex = 0; recipesIndex < recipes.length; ++recipesIndex) {
+      if (recipes[recipesIndex].appliance === devices[index]) {
+        applianceRecipeExist = true;
+      }
+    }
+    if (applianceRecipeExist) {
+      results.push(devices[index]);
+    }
+  }
+  return results;
+}
+
+function filterRecipesByKeyword(keyword) {
+  let results = [];
+  for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
+    const lesingredients = recipes[recipesIndex].ingredients;
+    let ingredientMatchKeyword = false;
+    for (
+      let ingredientsIndex = 0;
+      ingredientsIndex < lesingredients.length;
+      ingredientsIndex++
+    ) {
+      if (
+        lesingredients[ingredientsIndex].ingredient
+          .toLowerCase()
+          .indexOf(keyword.toLowerCase()) !== -1
+      ) {
+        ingredientMatchKeyword = true;
+      }
+    }
+    const nameMatchKeyword =
+      recipes[recipesIndex].name
+        .toLowerCase()
+        .indexOf(keyword.toLowerCase()) !== -1;
+    const descriptionMatchKeyword =
+      recipes[recipesIndex].description
+        .toLowerCase()
+        .indexOf(keyword.toLowerCase()) !== -1;
+
+    if (ingredientMatchKeyword || nameMatchKeyword || descriptionMatchKeyword) {
+      results.push(recipes[recipesIndex]);
+    }
+  }
+  return results;
+}

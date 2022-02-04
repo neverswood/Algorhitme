@@ -63,31 +63,11 @@ export function filterTagDevice() {
       tag.appendChild(divTag);
       divTag.appendChild(spanTag);
       console.log("target", event.target.textContent);
-      //filterRecipes();
       for (let index = 0; index < recipes.length; index++) {
-        const lesingredients = recipes[index].ingredients;
-        for (let i = 0; i < lesingredients.length; i++) {
-          var ingredientRecipeExist = lesingredients[i].ingredient
-            .toLowerCase()
-            .indexOf(event.target.textContent);
-        }
-        const nameRecipeExist = recipes[index].name
+        const applianceRecipeExist = recipes[index].appliance
           .toLowerCase()
-          .indexOf(event.target.textContent);
-        const descriptionRecipeExist = recipes[index].description
-          .toLowerCase()
-          .indexOf(event.target.textContent);
-        console.log("tagtarget", event.target.textContent);
-        console.log("tagtarget", event.target.textContent.toLowerCase());
-
-        console.log("blop", descriptionRecipeExist);
-        console.log("val", nameRecipeExist == undefined);
-
-        if (
-          nameRecipeExist == -1 &&
-          descriptionRecipeExist == -1 &&
-          ingredientRecipeExist == -1
-        ) {
+          .indexOf(event.target.textContent.toLowerCase());
+        if (applianceRecipeExist === -1) {
           item[index].style.display = "none";
         }
       }

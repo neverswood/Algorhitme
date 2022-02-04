@@ -4,10 +4,11 @@ import {
   closeDropdownIngredient,
   closeDropdownUtensil,
 } from "./dropdown.js";
-import { getItemDevice } from "./interface.js";
+import { filterDevicesByRecipes } from "./filter.js";
+import { renderDevicesDropdown } from "./interface.js";
 import { filterTagDevice } from "./tags.js";
 
-function getDevice() {
+export function getDevices() {
   let deviceByRecipes = [];
   for (let index = 0; index < recipes.length; index++) {
     deviceByRecipes.push(recipes[index].appliance);
@@ -18,6 +19,10 @@ function getDevice() {
 }
 
 var dropdownDeviceIsClosed = true;
+
+export function getDeviceWithRecipes() {
+  let devicesByRecipes = [];
+}
 
 export function dropdownDevices() {
   const dropdownDevices = document.getElementById("listbox-nameDevice");
@@ -35,10 +40,10 @@ export function dropdownDevices() {
       closeDropdownIngredient();
     }
     dropdownDeviceIsClosed = false;
-    const devices = [...new Set(getDevice())];
+    const devices = filterDevicesByRecipes();
     document.getElementById("listbox-nameDevice").style.display = "none";
     document.getElementById("dropdownDevice").style.width = "667px";
-    listBox.innerHTML = `<ul>${getItemDevice(devices).toLowerCase()}</ul>`;
+    listBox.innerHTML = renderDevicesDropdown(devices);
     filterTagDevice();
   });
   chevron.addEventListener("click", (e) => {

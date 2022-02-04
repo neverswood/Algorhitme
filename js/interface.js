@@ -1,4 +1,4 @@
-function displayIngredients(ingredients) {
+function renderIngredients(ingredients) {
   let item = "";
   for (let index = 0; index < ingredients.length; index++) {
     item += `<li>${ingredients[index].ingredient}: 
@@ -9,52 +9,60 @@ function displayIngredients(ingredients) {
   return item;
 }
 
-export function displayRecipes(recipe) {
-  const containerRecipe = document.getElementById("container-item");
-  const containerDiv = document.createElement("div");
-  containerDiv.setAttribute("class", "col-md-4");
-  const templateRecipe = `
-            <div class="container-item__recipe" id="${recipe.id}">
-            <div class="divEmpty"></div>
-            <div class="recipe">
-            <div class="recipe__header">
+export function renderRecipes(recipes) {
+  let result = "";
+  for (let index = 0; index < recipes.length; index++) {
+    result += renderRecipe(recipes[index]);
+  }
+  return result;
+}
+
+export function renderRecipe(recipe) {
+  return `
+    <div class="col-md-4">
+      <div class="container-item__recipe" id="${recipe.id}">
+        <div class="divEmpty">
+        </div>
+        <div class="recipe">
+          <div class="recipe__header">
             <h3>${recipe.name}</h3>
             <span><i class="far fa-clock"></i> ${recipe.time} min</span>
-            </div>
-            <div class="recipe__explanation">
+          </div>
+          <div class="recipe__explanation">
             <div class="recipe__ingrédients">
-            ${displayIngredients(recipe.ingredients)}
+              ${renderIngredients(recipe.ingredients)}
             </div>
             <div class="recipe__description">
-            ${recipe.description}...</div>
+              ${recipe.description}...
             </div>
-            </div>
-            </div>
-            `;
-  containerRecipe.appendChild(containerDiv);
-  containerDiv.innerHTML = templateRecipe;
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-export function getItemUtensil(utensils) {
-  let item = "";
-  for (let index = 0; index < utensils.length; index++) {
-    item += `<li class="listbox">${utensils[index]}</li>`;
-  }
-  return item;
+export function displayRecipes(recipes) {
+  const containerRecipe = document.getElementById("container-item");
+  containerRecipe.innerHTML = renderRecipes(recipes);
 }
 
-export function getItemIngredient(ingredient) {
-  let item = "";
-  for (let index = 0; index < ingredient.length; index++) {
-    item += `<li class="listbox">${ingredient[index]}</li>`;
+export function renderDropdownList(items) {
+  let result = "";
+  for (let index = 0; index < items.length; index++) {
+    result += `<li class="listbox">${items[index]}</li>`;
   }
-  return item;
+  return `<ul>${result}</ul>`;
 }
 
-export function getItemDevice(devices) {
-  let item = "";
-  for (let index = 0; index < devices.length; index++) {
-    item += `<li class="listbox">${devices[index]}</li>`;
-  }
-  return item;
+export function renderUtensilsDropdown(utensils) {
+  return renderDropdownList(utensils);
+}
+
+export function renderIngredientsDropdown(ingredients) {
+  return renderDropdownList(ingredients);
+}
+
+export function renderDevicesDropdown(devices) {
+  return renderDropdownList(devices);
 }

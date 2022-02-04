@@ -4,7 +4,7 @@ import {
   closeDropdownUtensil,
   closeDropdownDevice,
 } from "./dropdown.js";
-import { getItemIngredient } from "./interface.js";
+import { renderIngredientsDropdown } from "./interface.js";
 import { filterTagIngredient } from "./tags.js";
 
 function getIngredients() {
@@ -34,7 +34,7 @@ export function dropdownIngredients() {
     document.getElementById("search-ingredients").style.display = "block";
     document.getElementById("listbox-nameIngredient").style.display = "none";
     document.getElementById("dropdownIngredients").style.width = "667px";
-    listBox.innerHTML = `<ul>${getItemIngredient(ingredients)}</ul>`;
+    listBox.innerHTML = renderIngredientsDropdown(ingredients);
     filterTagIngredient();
   });
   chevron.addEventListener("click", () => {
