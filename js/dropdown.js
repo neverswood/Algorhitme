@@ -17,12 +17,12 @@ export function closeDropdownInactive(e) {
   }*/
 }
 
-export function closeDropdownDevice() {
-  const listBox = document.getElementById("listbox-devices");
+export function closeDropdownAppliance() {
+  const listBox = document.getElementById("listbox-appliances");
 
-  document.getElementById("search-device").style.display = "none";
-  document.getElementById("listbox-nameDevice").style.display = "flex";
-  document.getElementById("dropdownDevice").style.width = "135px";
+  document.getElementById("search-appliance").style.display = "none";
+  document.getElementById("listbox-nameAppliance").style.display = "flex";
+  document.getElementById("dropdownAppliance").style.width = "135px";
   listBox.innerHTML = "";
 }
 

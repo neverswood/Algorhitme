@@ -1,6 +1,6 @@
 import { recipes } from "./data/recipes.js";
 import {
-  closeDropdownDevice,
+  closeDropdownAppliance,
   closeDropdownIngredient,
   closeDropdownUtensil,
 } from "./dropdown.js";
@@ -25,7 +25,7 @@ export function dropdownUtensils(e) {
   const listBox = document.getElementById("listbox-utensils");
   dropdownUtensils.addEventListener("click", (e) => {
     if (e.target) {
-      closeDropdownDevice();
+      closeDropdownAppliance();
       closeDropdownIngredient();
     }
     dropdownUtensilsIsClosed = false;

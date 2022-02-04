@@ -2,7 +2,7 @@ import { recipes } from "./data/recipes.js";
 import {
   closeDropdownIngredient,
   closeDropdownUtensil,
-  closeDropdownDevice,
+  closeDropdownAppliance,
 } from "./dropdown.js";
 import { renderIngredientsDropdown } from "./interface.js";
 import { filterTagIngredient } from "./tags.js";
@@ -26,7 +26,7 @@ export function dropdownIngredients() {
   const listBox = document.getElementById("listbox-ingredients");
   dropdownIngredients.addEventListener("click", (e) => {
     if (e.target) {
-      closeDropdownDevice();
+      closeDropdownAppliance();
       closeDropdownUtensil();
     }
     dropdownIngredientsIsClosed = false;

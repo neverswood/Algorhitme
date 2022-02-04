@@ -1,5 +1,5 @@
 import { recipes } from "./data/recipes.js";
-import { closeDropdownDevice } from "./dropdown.js";
+import { closeDropdownAppliance } from "./dropdown.js";
 
 let item = document.getElementsByClassName("col-md-4");
 

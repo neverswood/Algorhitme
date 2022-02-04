@@ -63,13 +63,13 @@ export function renderIngredientsDropdown(ingredients) {
   return renderDropdownList(ingredients);
 }
 
-export function renderDevicesDropdown(devices) {
-  return renderDropdownList(devices);
+export function renderAppliancesDropdown(appliances) {
+  return renderDropdownList(appliances);
 }
 
 export function renderTag(tag) {
   return `
-  <div class="tag tag-device" data-tag="${tag}">
+  <div class="tag tag-appliance" data-tag="${tag}">
     ${tag}
     <span class="spanTag" ><i class="far fa-times-circle circle"></i></span>
   </div>

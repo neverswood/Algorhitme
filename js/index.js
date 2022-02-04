@@ -1,37 +1,35 @@
 import { recipes } from "./data/recipes.js";
 import { displayRecipes, displayTags } from "./interface.js";
 import {
-  displayDevicesDropdown,
-  bindDevicesDropdownEventListeners,
-  getDevices,
-} from "./dropdownDevice.js";
+  displayAppliancesDropdown,
+  bindAppliancesDropdownEventListeners,
+  getAppliances,
+} from "./dropdownAppliance.js";
 import { dropdownIngredients } from "./dropdownIngredient.js";
 import { dropdownUtensils } from "./dropdownUtensil.js";
 import { keyWord } from "./filter.js";
 import { filterUtensil } from "./filter.js";
-import { filterDevice } from "./filter.js";
+import { filterAppliance } from "./filter.js";
 import { filterIngredient } from "./filter.js";
-import { closeDropdownDevice } from "./dropdown.js";
+import { closeDropdownAppliance } from "./dropdown.js";
 import App from "./App.js";
-
-//import { closeDropdownInactive } from "./dropdown.js";
 
 function index() {
   const app = new App();
   window.addEventListener("click", (e) => {
-    if (!e.target.matches("#dropdownDevice *")) {
-      closeDropdownDevice();
+    if (!e.target.matches("#dropdownAppliance *")) {
+      closeDropdownAppliance();
     }
   });
 
   displayRecipes(app.filteredRecipes);
-  bindDevicesDropdownEventListeners(app);
+  bindAppliancesDropdownEventListeners(app);
   bindRemoveTagEventListener(app);
   dropdownUtensils();
   dropdownIngredients();
   keyWord(app);
   filterUtensil();
-  filterDevice();
+  filterAppliance();
   filterIngredient();
   //filterRecipesBuyTag();
   //closeDropdownInactive();

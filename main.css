@@ -83,9 +83,9 @@
   background-color: rgb(35, 119, 245);
 }
 
-.device,
-#input-device,
-.search-device {
+.appliance,
+#input-appliance,
+.search-appliance {
   background-color: rgb(151, 229, 151);
 }
 
@@ -96,7 +96,7 @@
 }
 
 #input-utensils,
-#input-device,
+#input-appliance,
 #input-ingredients {
   width: 600px;
   color: white;
@@ -105,25 +105,25 @@
 }
 
 #input-utensils::placeholder,
-#input-device::placeholder,
+#input-appliance::placeholder,
 #input-ingredients::placeholder {
   color: #f0eeee;
 }
 
 #input-utensils:focus,
-#input-device:focus,
+#input-appliance:focus,
 #input-ingredients:focus {
   outline: none;
 }
 
 #listbox-utensils,
-#listbox-devices,
+#listbox-appliances,
 #listbox-ingredients {
   column-count: 3;
 }
 
 .search-ingredients,
-.search-device,
+.search-appliance,
 .search-utensils {
   display: none;
   font-size: 18px;
@@ -271,9 +271,9 @@
   background-color: rgb(35, 119, 245);
 }
 
-.device,
-#input-device,
-.search-device {
+.appliance,
+#input-appliance,
+.search-appliance {
   background-color: rgb(151, 229, 151);
 }
 
@@ -284,7 +284,7 @@
 }
 
 #input-utensils,
-#input-device,
+#input-appliance,
 #input-ingredients {
   width: 600px;
   color: white;
@@ -293,25 +293,25 @@
 }
 
 #input-utensils::placeholder,
-#input-device::placeholder,
+#input-appliance::placeholder,
 #input-ingredients::placeholder {
   color: #f0eeee;
 }
 
 #input-utensils:focus,
-#input-device:focus,
+#input-appliance:focus,
 #input-ingredients:focus {
   outline: none;
 }
 
 #listbox-utensils,
-#listbox-devices,
+#listbox-appliances,
 #listbox-ingredients {
   column-count: 3;
 }
 
 .search-ingredients,
-.search-device,
+.search-appliance,
 .search-utensils {
   display: none;
   font-size: 18px;
@@ -363,7 +363,7 @@
   background-color: rgb(35, 119, 245);
 }
 
-.tag-device {
+.tag-appliance {
   background-color: rgb(151, 229, 151);
 }
 

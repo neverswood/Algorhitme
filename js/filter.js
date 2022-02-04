@@ -1,6 +1,6 @@
 import { recipes } from "./data/recipes.js";
 import { displayRecipes } from "./interface.js";
-import { getDevices } from "./dropdownDevice.js";
+import { getAppliances } from "./dropdownAppliance.js";
 
 export function keyWord(app) {
   let inputSearch = document.getElementById("searchbar");
@@ -9,8 +9,8 @@ export function keyWord(app) {
   });
 }
 
-export function filterDevice() {
-  let inputSearch = document.getElementById("input-device");
+export function filterAppliance() {
+  let inputSearch = document.getElementById("input-appliance");
   let listBoxLi = document.getElementsByClassName("listbox");
   inputSearch.addEventListener("keyup", () => {
     if (inputSearch.value.length >= 3) {
