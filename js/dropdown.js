@@ -18,9 +18,12 @@ export function closeDropdownInactive(e) {
 }
 
 export function closeDropdownDevice() {
+  const listBox = document.getElementById("listbox-devices");
+
   document.getElementById("search-device").style.display = "none";
   document.getElementById("listbox-nameDevice").style.display = "flex";
   document.getElementById("dropdownDevice").style.width = "135px";
+  listBox.innerHTML = "";
 }
 
 export function closeDropdownIngredient() {

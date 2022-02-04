@@ -2,17 +2,17 @@ import { recipes } from "./data/recipes.js";
 import { displayRecipes } from "./interface.js";
 import { getDevices } from "./dropdownDevice.js";
 
-export function keyWord() {
+export function keyWord(app) {
   let inputSearch = document.getElementById("searchbar");
 
   inputSearch.addEventListener("keyup", () => {
     console.log("length", inputSearch.value.length);
     if (inputSearch.value.length < 3) {
-      displayRecipes(recipes);
+      app.filteredRecipes = recipes;
     } else {
-      const filteredRecipes = filterRecipesByKeyword(inputSearch.value);
-      displayRecipes(filteredRecipes);
+      app.filteredRecipes = filterRecipesByKeyword(inputSearch.value);
     }
+    displayRecipes(app.filteredRecipes);
   });
 }
 
@@ -71,25 +71,6 @@ export function filterUtensil() {
       }
     }
   });
-}
-
-//filtre recette par tag
-
-export function filterDevicesByRecipes() {
-  const devices = [...new Set(getDevices())];
-  let results = [];
-  for (let index = 0; index < devices.length; index++) {
-    let applianceRecipeExist = false;
-    for (let recipesIndex = 0; recipesIndex < recipes.length; ++recipesIndex) {
-      if (recipes[recipesIndex].appliance === devices[index]) {
-        applianceRecipeExist = true;
-      }
-    }
-    if (applianceRecipeExist) {
-      results.push(devices[index]);
-    }
-  }
-  return results;
 }
 
 function filterRecipesByKeyword(keyword) {

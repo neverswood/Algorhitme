@@ -1,4 +1,5 @@
 import { recipes } from "./data/recipes.js";
+import { closeDropdownDevice } from "./dropdown.js";
 
 let item = document.getElementsByClassName("col-md-4");
 
@@ -19,7 +20,7 @@ export function filterTagUtensil() {
       tag.appendChild(divTag);
       divTag.appendChild(spanTag);
 
-      closeTag();
+      bindCloseTag();
     });
   }
 }
@@ -41,7 +42,7 @@ export function filterTagIngredient() {
       tag.appendChild(divTag);
       divTag.appendChild(spanTag);
 
-      closeTag();
+      bindCloseTag();
     });
   }
 }
@@ -71,8 +72,8 @@ export function filterTagDevice() {
           item[index].style.display = "none";
         }
       }
-
-      closeTag();
+      closeDropdownDevice();
+      bindCloseTag();
 
       // list[index].style.display = "none";
       //enleve les li qui ne sont pas dans les recettes restante
@@ -110,7 +111,7 @@ export function filterTagDevice() {
   }
 }
 
-function closeTag() {
+function bindCloseTag() {
   let span = document.querySelectorAll(".spanTag");
 
   for (let index = 0; index < span.length; index++) {
