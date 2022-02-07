@@ -1,13 +1,7 @@
-import { recipes } from "./data/recipes.js";
-import {
-  closeDropdownIngredient,
-  closeDropdownUtensil,
-  closeDropdownAppliance,
-} from "./dropdown.js";
+import { closeDropdownIngredient } from "./dropdown.js";
 import { renderIngredientsDropdown } from "./interface.js";
-import { filterTagIngredient } from "./tags.js";
 
-function getIngredients() {
+function getIngredients(recipes) {
   let ingredientByRecipes = [];
   for (let index = 0; index < recipes.length; index++) {
     const lesingredients = recipes[index].ingredients;
@@ -15,34 +9,37 @@ function getIngredients() {
       ingredientByRecipes.push(lesingredients[i].ingredient);
     }
   }
-  return new Set(ingredientByRecipes);
+  const ingredient = ingredientByRecipes.flat();
+  return [...new Set(ingredient)];
 }
 
-var dropdownIngredientsIsClosed = true;
-
-export function dropdownIngredients() {
-  const dropdownIngredients = document.getElementById("listbox-nameIngredient");
-  const chevron = document.getElementById("chevron1");
+export function displayIngredientsDropdown(ingredients) {
   const listBox = document.getElementById("listbox-ingredients");
+  const searchIngredient = document.getElementById("search-ingredients");
+  searchIngredient.style.display = "block";
+  document.getElementById("listbox-nameIngredient").style.display = "none";
+  document.getElementById("dropdownIngredients").style.width = "667px";
+  listBox.innerHTML = renderIngredientsDropdown(ingredients);
+}
+
+export function bindIngredientsDropdownEventListeners(app) {
+  const dropdownIngredients = document.getElementById("listbox-nameIngredient");
+  const listBox = document.getElementById("listbox-ingredients");
+  const chevron = document.getElementById("chevron1");
+
   dropdownIngredients.addEventListener("click", (e) => {
-    if (e.target) {
-      closeDropdownAppliance();
-      closeDropdownUtensil();
-    }
-    dropdownIngredientsIsClosed = false;
-    const ingredients = [...new Set(getIngredients())];
-    document.getElementById("search-ingredients").style.display = "block";
-    document.getElementById("listbox-nameIngredient").style.display = "none";
-    document.getElementById("dropdownIngredients").style.width = "667px";
-    listBox.innerHTML = renderIngredientsDropdown(ingredients);
-    filterTagIngredient();
+    const ingredients = getIngredients(app.filteredRecipes);
+    displayIngredientsDropdown(ingredients);
   });
   chevron.addEventListener("click", () => {
-    dropdownIngredientsIsClosed = true;
     closeDropdownIngredient();
-
-    listBox.innerHTML = "";
-    if (dropdownIngredientsIsClosed == true) {
+  });
+  listBox.addEventListener("click", (e) => {
+    if (!e.target.matches("li")) {
+      return;
     }
+    app.toggleTag(e.target.textContent, "ingredients");
+
+    closeDropdownIngredient();
   });
 }

@@ -69,8 +69,8 @@ export function renderAppliancesDropdown(appliances) {
 
 export function renderTag(tag) {
   return `
-  <div class="tag tag-appliance" data-tag="${tag}">
-    ${tag}
+  <div class="tag ${tag.type}" data-tag="${tag.name}">
+    ${tag.name}
     <span class="spanTag" ><i class="far fa-times-circle circle"></i></span>
   </div>
   `;

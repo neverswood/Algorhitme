@@ -344,7 +344,7 @@
 }
 .tag {
   padding: 10px;
-  color: white;
+  /*color: white;*/
   align-items: center;
   font-weight: 600;
   display: flex;

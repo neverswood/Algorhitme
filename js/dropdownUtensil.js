@@ -1,11 +1,6 @@
 import { recipes } from "./data/recipes.js";
-import {
-  closeDropdownAppliance,
-  closeDropdownIngredient,
-  closeDropdownUtensil,
-} from "./dropdown.js";
+import { closeDropdownUtensil } from "./dropdown.js";
 import { renderUtensilsDropdown } from "./interface.js";
-import { filterTagUtensil } from "./tags.js";
 
 export function getUtensils() {
   let ustensilsByRecipes = [];
@@ -17,28 +12,33 @@ export function getUtensils() {
   return [...new Set(allUstensils)];
 }
 
-var dropdownUtensilsIsClosed = true;
-
-export function dropdownUtensils(e) {
-  const dropdownUtensils = document.getElementById("listbox-nameUtensils");
-  const chevron = document.getElementById("chevron3");
+function displayUtensilsDropdown(utensils) {
   const listBox = document.getElementById("listbox-utensils");
-  dropdownUtensils.addEventListener("click", (e) => {
-    if (e.target) {
-      closeDropdownAppliance();
-      closeDropdownIngredient();
-    }
-    dropdownUtensilsIsClosed = false;
-    const utensils = getUtensils();
-    document.getElementById("search-utensils").style.display = "block";
-    document.getElementById("listbox-nameUtensils").style.display = "none";
-    document.getElementById("dropdownUtensils").style.width = "667px";
-    listBox.innerHTML = renderUtensilsDropdown(utensils);
-    filterTagUtensil();
+  document.getElementById("search-utensils").style.display = "block";
+  document.getElementById("listbox-nameUtensils").style.display = "none";
+  document.getElementById("dropdownUtensils").style.width = "667px";
+  listBox.innerHTML = renderUtensilsDropdown(utensils);
+}
+
+export function bindUtensilsDropdownEventListeners(app) {
+  const dropdownUtensils = document.getElementById("listbox-nameUtensils");
+  const listBox = document.getElementById("listbox-utensils");
+
+  const chevron = document.getElementById("chevron3");
+  dropdownUtensils.addEventListener("click", () => {
+    const utensils = getUtensils(app.filteredRecipes);
+    displayUtensilsDropdown(utensils);
   });
   chevron.addEventListener("click", (e) => {
-    dropdownUtensilsIsClosed = true;
     closeDropdownUtensil();
     listBox.innerHTML = "";
+  });
+  listBox.addEventListener("click", (e) => {
+    if (!e.target.matches("li")) {
+      return;
+    }
+    app.toggleTag(e.target.textContent, "utensils");
+
+    closeDropdownUtensil();
   });
 }

@@ -1,9 +1,5 @@
 import { closeDropdownAppliance } from "./dropdown.js";
-import {
-  displayTags,
-  renderAppliancesDropdown,
-  renderTag,
-} from "./interface.js";
+import { renderAppliancesDropdown } from "./interface.js";
 
 export function getAppliances(recipes) {
   let applianceByRecipes = [];
@@ -30,18 +26,24 @@ export function bindAppliancesDropdownEventListeners(app) {
   const chevron = document.getElementById("chevron2");
   const listBox = document.getElementById("listbox-appliances");
 
-  dropdownAppliances.addEventListener("click", (e) => {
+  dropdownAppliances.addEventListener("click", () => {
     const appliances = getAppliances(app.filteredRecipes);
     displayAppliancesDropdown(appliances);
   });
-  chevron.addEventListener("click", (e) => {
+  chevron.addEventListener("click", () => {
     closeDropdownAppliance();
   });
   listBox.addEventListener("click", (e) => {
     if (!e.target.matches("li")) {
       return;
     }
+
     app.toggleTag(e.target.textContent, "appliance");
+    console.log("ero", e.target);
+    //if(e.target.matches())
+
+    //e.target.classList.toggle("tag-appliance"); ajoute la classe au li...
+    //app.toggleTag(e.target.closest(".tag").classList.add("tag-appliance"));
 
     closeDropdownAppliance();
   });
