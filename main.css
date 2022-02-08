@@ -335,10 +335,6 @@
   display: list-item;
 }
 
-#message {
-  display: none;
-}
-
 #tag {
   display: flex;
 }

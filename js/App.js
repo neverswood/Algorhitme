@@ -9,17 +9,24 @@ export default class App {
   }
 
   updateFilteredRecipes() {
+    console.log("lop", this.filteredRecipes.length);
     if (this.keyword.length < 3) {
       this.filteredRecipes = recipes;
     } else {
       this.filteredRecipes = filterRecipesByKeyword(this.keyword);
     }
+
     this.filteredRecipes = filterRecipesByTags(
       this.filteredRecipes,
       this.selectedTags
     );
-
-    displayRecipes(this.filteredRecipes);
+    if (this.filteredRecipes.length > 0) {
+      displayRecipes(this.filteredRecipes);
+    } else {
+      const containerRecipe = document.getElementById("container-item");
+      containerRecipe.innerHTML =
+        "Aucune recette ne correspond à votre critère... vous pouvez chercher << tarte aux pommes >>,  << poisson >> , etc.";
+    }
   }
 
   toggleTag(tag, tagType) {
@@ -76,6 +83,7 @@ function filterRecipesByKeyword(keyword) {
       results.push(recipes[recipesIndex]);
     }
   }
+
   return results;
 }
 
