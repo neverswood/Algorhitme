@@ -1,7 +1,3 @@
-import { recipes } from "./data/recipes.js";
-import { displayRecipes } from "./interface.js";
-import { getAppliances } from "./dropdownAppliance.js";
-
 export function keyWord(app) {
   let inputSearch = document.getElementById("searchbar");
   inputSearch.addEventListener("keyup", () => {
@@ -15,10 +11,16 @@ export function filterAppliance() {
   inputSearch.addEventListener("keyup", () => {
     if (inputSearch.value.length >= 3) {
       for (let index = 0; index < listBoxLi.length; index++) {
-        if (
-          !listBoxLi[index].innerHTML.toLowerCase().includes(inputSearch.value)
-        ) {
-          listBoxLi[index].style.display = "none";
+        if (inputSearch.value.length >= 3) {
+          if (
+            !listBoxLi[index].innerHTML
+              .toLowerCase()
+              .includes(inputSearch.value)
+          ) {
+            listBoxLi[index].style.display = "none";
+          } else {
+            listBoxLi[index].style.display = "list-item";
+          }
         } else {
           listBoxLi[index].style.display = "list-item";
         }

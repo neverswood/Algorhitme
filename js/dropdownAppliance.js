@@ -39,12 +39,6 @@ export function bindAppliancesDropdownEventListeners(app) {
     }
 
     app.toggleTag(e.target.textContent, "appliance");
-    console.log("ero", e.target);
-    //if(e.target.matches())
-
-    //e.target.classList.toggle("tag-appliance"); ajoute la classe au li...
-    //app.toggleTag(e.target.closest(".tag").classList.add("tag-appliance"));
-
     closeDropdownAppliance();
   });
 }
