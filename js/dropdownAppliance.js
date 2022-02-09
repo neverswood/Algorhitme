@@ -4,9 +4,7 @@ import { renderAppliancesDropdown } from "./interface.js";
 export function getAppliances(recipes) {
   let applianceByRecipes = [];
   recipes.forEach((recipes) => applianceByRecipes.push(recipes.appliance));
-  /*for (let index = 0; index < recipes.length; index++) {
-    applianceByRecipes.push(recipes[index].appliance);
-  }*/
+
   const allAppliances = applianceByRecipes.flat();
 
   return [...new Set(allAppliances)];
