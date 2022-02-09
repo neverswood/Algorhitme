@@ -10,21 +10,15 @@ export function filterAppliance() {
   let listBoxLi = document.getElementsByClassName("listbox");
   inputSearch.addEventListener("keyup", () => {
     if (inputSearch.value.length >= 3) {
-      for (let index = 0; index < listBoxLi.length; index++) {
+      Array.from(listBoxLi).map((listBoxLi) => {
         if (inputSearch.value.length >= 3) {
-          if (
-            !listBoxLi[index].innerHTML
-              .toLowerCase()
-              .includes(inputSearch.value)
-          ) {
-            listBoxLi[index].style.display = "none";
+          if (!listBoxLi.innerHTML.toLowerCase().includes(inputSearch.value)) {
+            listBoxLi.style.display = "none";
           } else {
-            listBoxLi[index].style.display = "list-item";
+            listBoxLi.style.display = "list-item";
           }
-        } else {
-          listBoxLi[index].style.display = "list-item";
         }
-      }
+      });
     }
   });
 }
@@ -34,36 +28,31 @@ export function filterIngredient() {
   let listBoxLi = document.getElementsByClassName("listbox");
   inputSearch.addEventListener("keyup", () => {
     if (inputSearch.value.length >= 3) {
-      for (let index = 0; index < listBoxLi.length; index++) {
-        if (
-          !listBoxLi[index].innerHTML.toLowerCase().includes(inputSearch.value)
-        ) {
-          listBoxLi[index].style.display = "none";
+      Array.from(listBoxLi).map((listBoxLi) => {
+        if (!listBoxLi.innerHTML.toLowerCase().includes(inputSearch.value)) {
+          listBoxLi.style.display = "none";
         } else {
-          listBoxLi[index].style.display = "list-item";
+          listBoxLi.style.display = "list-item";
         }
-      }
+      });
     }
   });
 }
 
-let inputSearchUtensils = document.getElementById("input-utensils");
-
 export function filterUtensil() {
+  let inputSearchUtensils = document.getElementById("input-utensils");
   let listBoxLi = document.getElementsByClassName("listbox");
   inputSearchUtensils.addEventListener("keyup", () => {
     if (inputSearchUtensils.value.length >= 3) {
-      for (let index = 0; index < listBoxLi.length; index++) {
+      Array.from(listBoxLi).map((listBoxLi) => {
         if (
-          !listBoxLi[index].innerHTML
-            .toLowerCase()
-            .includes(inputSearchUtensils.value)
+          !listBoxLi.innerHTML.toLowerCase().includes(inputSearchUtensils.value)
         ) {
-          listBoxLi[index].style.display = "none";
+          listBoxLi.style.display = "none";
         } else {
-          listBoxLi[index].style.display = "list-item";
+          listBoxLi.style.display = "list-item";
         }
-      }
+      });
     }
   });
 }
