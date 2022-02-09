@@ -75,9 +75,7 @@ export function renderTag(tag) {
 
 export function renderTags(tags) {
   let result = "";
-  for (let tagsIndex = 0; tagsIndex < tags.length; ++tagsIndex) {
-    result += renderTag(tags[tagsIndex]);
-  }
+  tags.forEach((tags) => (result += renderTag(tags)));
   return result;
 }
 
