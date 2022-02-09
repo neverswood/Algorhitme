@@ -1,19 +1,24 @@
+import { recipes } from "./data/recipes.js";
+
 function renderIngredients(ingredients) {
   let item = "";
-  for (let index = 0; index < ingredients.length; index++) {
-    item += `<li>${ingredients[index].ingredient}: 
-        <span>${ingredients[index].quantity ?? ""} ${
-      ingredients[index].unit ?? ""
-    }</span></li>`;
-  }
+  ingredients.forEach(
+    (ingredients) =>
+      (item += `<li>${ingredients.ingredient}: 
+  <span>${ingredients.quantity ?? ""} ${ingredients.unit ?? ""}</span></li>`)
+  );
+  //for (let index = 0; index < ingredients.length; index++) {
+
+  //}
   return item;
 }
 
 export function renderRecipes(recipes) {
   let result = "";
-  for (let index = 0; index < recipes.length; index++) {
+  recipes.forEach((recipes) => (result += renderRecipe(recipes)));
+  /* for (let index = 0; index < recipes.length; index++) {
     result += renderRecipe(recipes[index]);
-  }
+  }*/
   return result;
 }
 
