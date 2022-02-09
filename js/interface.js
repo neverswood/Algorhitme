@@ -7,18 +7,12 @@ function renderIngredients(ingredients) {
       (item += `<li>${ingredients.ingredient}: 
   <span>${ingredients.quantity ?? ""} ${ingredients.unit ?? ""}</span></li>`)
   );
-  //for (let index = 0; index < ingredients.length; index++) {
-
-  //}
   return item;
 }
 
 export function renderRecipes(recipes) {
   let result = "";
   recipes.forEach((recipes) => (result += renderRecipe(recipes)));
-  /* for (let index = 0; index < recipes.length; index++) {
-    result += renderRecipe(recipes[index]);
-  }*/
   return result;
 }
 
@@ -54,9 +48,7 @@ export function displayRecipes(recipes) {
 
 export function renderDropdownList(items) {
   let result = "";
-  for (let index = 0; index < items.length; index++) {
-    result += `<li class="listbox">${items[index]}</li>`;
-  }
+  items.forEach((items) => (result += `<li class="listbox">${items}</li>`));
   return `<ul>${result}</ul>`;
 }
 

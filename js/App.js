@@ -9,7 +9,6 @@ export default class App {
   }
 
   updateFilteredRecipes() {
-    console.log("lop", this.filteredRecipes.length);
     if (this.keyword.length < 3) {
       this.filteredRecipes = recipes;
     } else {
