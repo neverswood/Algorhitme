@@ -3,9 +3,7 @@ import { renderUtensilsDropdown } from "./interface.js";
 
 export function getUtensils(recipes) {
   let ustensilsByRecipes = [];
-  for (let index = 0; index < recipes.length; index++) {
-    ustensilsByRecipes.push(recipes[index].ustensils);
-  }
+  recipes.forEach((recipes) => ustensilsByRecipes.push(recipes.ustensils));
   const allUstensils = ustensilsByRecipes.flat();
   return [...new Set(allUstensils)];
 }

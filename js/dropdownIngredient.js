@@ -5,7 +5,6 @@ function getIngredients(recipes) {
   let ingredientByRecipes = [];
   recipes.map((recipes) => {
     const ingredients = recipes.ingredients;
-    console.log(ingredients);
     ingredients.forEach((ingredients) => {
       ingredientByRecipes.push(ingredients.ingredient);
     });
