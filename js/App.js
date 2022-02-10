@@ -53,36 +53,25 @@ export default class App {
 
 function filterRecipesByKeyword(keyword) {
   let results = [];
-  for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
-    const ingredients = recipes[recipesIndex].ingredients;
+  recipes.map((recipes) => {
+    const ingredients = recipes.ingredients;
     let ingredientMatchKeyword = false;
-    for (
-      let ingredientsIndex = 0;
-      ingredientsIndex < ingredients.length;
-      ingredientsIndex++
-    ) {
+    ingredients.forEach((ingredients) => {
       if (
-        ingredients[ingredientsIndex].ingredient
-          .toLowerCase()
-          .indexOf(keyword.toLowerCase()) !== -1
+        ingredients.ingredient.toLowerCase().indexOf(keyword.toLowerCase()) !==
+        -1
       ) {
         ingredientMatchKeyword = true;
       }
-    }
+    });
     const nameMatchKeyword =
-      recipes[recipesIndex].name
-        .toLowerCase()
-        .indexOf(keyword.toLowerCase()) !== -1;
+      recipes.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
     const descriptionMatchKeyword =
-      recipes[recipesIndex].description
-        .toLowerCase()
-        .indexOf(keyword.toLowerCase()) !== -1;
-
+      recipes.description.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
     if (ingredientMatchKeyword || nameMatchKeyword || descriptionMatchKeyword) {
-      results.push(recipes[recipesIndex]);
+      results.push(recipes);
     }
-  }
-
+  });
   return results;
 }
 
@@ -91,42 +80,34 @@ function filterRecipesByTags(recipes, tags) {
   if (tags.length === 0) {
     results = recipes;
   } else {
-    for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
-      for (let tagsIndex = 0; tagsIndex < tags.length; ++tagsIndex) {
-        const ingredients = recipes[recipesIndex].ingredients;
-        for (
-          let ingredientsIndex = 0;
-          ingredientsIndex < ingredients.length;
-          ingredientsIndex++
-        ) {
-          let ingredientMatchTag = ingredients[ingredientsIndex].ingredient
+    recipes.map((recipes) => {
+      tags.forEach((tags) => {
+        const ingredients = recipes.ingredients;
+        ingredients.forEach((ingredients) => {
+          let ingredientMatchTag = ingredients.ingredient
             .toLowerCase()
-            .indexOf(tags[tagsIndex].name.toLowerCase());
+            .indexOf(tags.name.toLowerCase());
           if (ingredientMatchTag > -1) {
-            results.push(recipes[recipesIndex]);
+            results.push(recipes);
           }
-        }
-        for (
-          let ustensilsIndex = 0;
-          ustensilsIndex < recipes[recipesIndex].ustensils.length;
-          ++ustensilsIndex
-        ) {
-          let utensilMatchTag = recipes[recipesIndex].ustensils[ustensilsIndex]
+        });
+        const utensils = recipes.ustensils;
+        utensils.forEach((utensils) => {
+          let utensilMatchTag = utensils
             .toLowerCase()
-            .indexOf(tags[tagsIndex].name.toLowerCase());
+            .indexOf(tags.name.toLowerCase());
           if (utensilMatchTag > -1) {
-            results.push(recipes[recipesIndex]);
+            results.push(recipes);
           }
-        }
-
-        let applianceMatchTag = recipes[recipesIndex].appliance
+        });
+        let applianceMatchTag = recipes.appliance
           .toLowerCase()
-          .indexOf(tags[tagsIndex].name.toLowerCase());
+          .indexOf(tags.name.toLowerCase());
         if (applianceMatchTag > -1) {
-          results.push(recipes[recipesIndex]);
+          results.push(recipes);
         }
-      }
-    }
+      });
+    });
   }
 
   return results;
