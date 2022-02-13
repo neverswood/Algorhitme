@@ -1,25 +1,17 @@
-export function closeDropdownAppliance() {
-  const listBox = document.getElementById("listbox-appliances");
+import { renderDropdown } from "./interface.js";
 
-  document.getElementById("search-appliance").style.display = "none";
-  document.getElementById("listbox-nameAppliance").style.display = "flex";
-  document.getElementById("dropdownAppliance").style.width = "135px";
+export function displayCloseDropdown(type) {
+  document.getElementById(`search-${type}`).style.display = "none";
+  document.getElementById(`listboxName-${type}`).style.display = "flex";
+  document.getElementById(`dropdown-${type}`).style.width = "135px";
+  const listBox = document.getElementById(`listbox-${type}`);
   listBox.innerHTML = "";
 }
 
-export function closeDropdownIngredient() {
-  document.getElementById("search-ingredients").style.display = "none";
-  document.getElementById("listbox-nameIngredient").style.display = "flex";
-  document.getElementById("dropdownIngredients").style.width = "135px";
-  const listBox = document.getElementById("listbox-ingredients");
-  listBox.innerHTML = "";
-}
-
-export function closeDropdownUtensil() {
-  const listBox = document.getElementById("listbox-utensils");
-
-  document.getElementById("search-utensils").style.display = "none";
-  document.getElementById("listbox-nameUtensils").style.display = "flex";
-  document.getElementById("dropdownUtensils").style.width = "135px";
-  listBox.innerHTML = "";
+export function displayDropdown(type, list) {
+  const listBox = document.getElementById(`listbox-${type}`);
+  document.getElementById(`search-${type}`).style.display = "block";
+  document.getElementById(`listboxName-${type}`).style.display = "none";
+  document.getElementById(`dropdown-${type}`).style.width = "667px";
+  listBox.innerHTML = renderDropdown(list);
 }

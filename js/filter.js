@@ -1,13 +1,14 @@
-export function keyWord(app) {
+export function bindKeyWordEventListeners(app) {
   let inputSearch = document.getElementById("searchbar");
   inputSearch.addEventListener("keyup", () => {
     app.setKeyword(inputSearch.value);
   });
 }
 
-export function filterAppliance() {
-  let inputSearch = document.getElementById("input-appliance");
+export function filterDropdown(type) {
+  let inputSearch = document.getElementById(`input-${type}`);
   let listBoxLi = document.getElementsByClassName("listbox");
+  console.log("jio", inputSearch);
   inputSearch.addEventListener("keyup", () => {
     if (inputSearch.value.length >= 3) {
       Array.from(listBoxLi).map((listBoxLi) => {
@@ -17,40 +18,6 @@ export function filterAppliance() {
           } else {
             listBoxLi.style.display = "list-item";
           }
-        }
-      });
-    }
-  });
-}
-
-export function filterIngredient() {
-  let inputSearch = document.getElementById("input-ingredients");
-  let listBoxLi = document.getElementsByClassName("listbox");
-  inputSearch.addEventListener("keyup", () => {
-    if (inputSearch.value.length >= 3) {
-      Array.from(listBoxLi).map((listBoxLi) => {
-        if (!listBoxLi.innerHTML.toLowerCase().includes(inputSearch.value)) {
-          listBoxLi.style.display = "none";
-        } else {
-          listBoxLi.style.display = "list-item";
-        }
-      });
-    }
-  });
-}
-
-export function filterUtensil() {
-  let inputSearchUtensils = document.getElementById("input-utensils");
-  let listBoxLi = document.getElementsByClassName("listbox");
-  inputSearchUtensils.addEventListener("keyup", () => {
-    if (inputSearchUtensils.value.length >= 3) {
-      Array.from(listBoxLi).map((listBoxLi) => {
-        if (
-          !listBoxLi.innerHTML.toLowerCase().includes(inputSearchUtensils.value)
-        ) {
-          listBoxLi.style.display = "none";
-        } else {
-          listBoxLi.style.display = "list-item";
         }
       });
     }

@@ -3,16 +3,16 @@ import { recipes } from "./data/recipes.js";
 function renderIngredients(ingredients) {
   let item = "";
   ingredients.forEach(
-    (ingredients) =>
-      (item += `<li>${ingredients.ingredient}: 
-  <span>${ingredients.quantity ?? ""} ${ingredients.unit ?? ""}</span></li>`)
+    (ingredient) =>
+      (item += `<li>${ingredient.ingredient}: 
+  <span>${ingredient.quantity ?? ""} ${ingredient.unit ?? ""}</span></li>`)
   );
   return item;
 }
 
 export function renderRecipes(recipes) {
   let result = "";
-  recipes.forEach((recipes) => (result += renderRecipe(recipes)));
+  recipes.forEach((recipe) => (result += renderRecipe(recipe)));
   return result;
 }
 
@@ -48,20 +48,12 @@ export function displayRecipes(recipes) {
 
 export function renderDropdownList(items) {
   let result = "";
-  items.forEach((items) => (result += `<li class="listbox">${items}</li>`));
+  items.forEach((item) => (result += `<li class="listbox">${item}</li>`));
   return `<ul>${result}</ul>`;
 }
 
-export function renderUtensilsDropdown(utensils) {
-  return renderDropdownList(utensils);
-}
-
-export function renderIngredientsDropdown(ingredients) {
-  return renderDropdownList(ingredients);
-}
-
-export function renderAppliancesDropdown(appliances) {
-  return renderDropdownList(appliances);
+export function renderDropdown(type) {
+  return renderDropdownList(type);
 }
 
 export function renderTag(tag) {
@@ -75,7 +67,7 @@ export function renderTag(tag) {
 
 export function renderTags(tags) {
   let result = "";
-  tags.forEach((tags) => (result += renderTag(tags)));
+  tags.forEach((tag) => (result += renderTag(tag)));
   return result;
 }
 

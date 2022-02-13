@@ -53,8 +53,8 @@ export default class App {
 
 function filterRecipesByKeyword(keyword) {
   let results = [];
-  recipes.map((recipes) => {
-    const ingredients = recipes.ingredients;
+  recipes.map((recipe) => {
+    const ingredients = recipe.ingredients;
     let ingredientMatchKeyword = false;
     ingredients.forEach((ingredients) => {
       if (
@@ -65,50 +65,50 @@ function filterRecipesByKeyword(keyword) {
       }
     });
     const nameMatchKeyword =
-      recipes.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+      recipe.name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
     const descriptionMatchKeyword =
-      recipes.description.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+      recipe.description.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
     if (ingredientMatchKeyword || nameMatchKeyword || descriptionMatchKeyword) {
-      results.push(recipes);
+      results.push(recipe);
     }
   });
   return results;
 }
 
 function filterRecipesByTags(recipes, tags) {
-  let results = [];
   if (tags.length === 0) {
-    results = recipes;
-  } else {
-    recipes.map((recipes) => {
-      tags.forEach((tags) => {
-        const ingredients = recipes.ingredients;
-        ingredients.forEach((ingredients) => {
-          let ingredientMatchTag = ingredients.ingredient
-            .toLowerCase()
-            .indexOf(tags.name.toLowerCase());
-          if (ingredientMatchTag > -1) {
-            results.push(recipes);
-          }
-        });
-        const utensils = recipes.ustensils;
-        utensils.forEach((utensils) => {
-          let utensilMatchTag = utensils
-            .toLowerCase()
-            .indexOf(tags.name.toLowerCase());
-          if (utensilMatchTag > -1) {
-            results.push(recipes);
-          }
-        });
-        let applianceMatchTag = recipes.appliance
+    return recipes;
+  }
+  let results = [];
+
+  recipes.map((recipe) => {
+    tags.forEach((tag) => {
+      const ingredients = recipe.ingredients;
+      ingredients.forEach((ingredients) => {
+        let ingredientMatchTag = ingredients.ingredient
           .toLowerCase()
-          .indexOf(tags.name.toLowerCase());
-        if (applianceMatchTag > -1) {
-          results.push(recipes);
+          .indexOf(tag.name.toLowerCase());
+        if (ingredientMatchTag > -1) {
+          results.push(recipe);
         }
       });
+      const utensils = recipe.ustensils;
+      utensils.forEach((utensils) => {
+        let utensilMatchTag = utensils
+          .toLowerCase()
+          .indexOf(tag.name.toLowerCase());
+        if (utensilMatchTag > -1) {
+          results.push(recipe);
+        }
+      });
+      let applianceMatchTag = recipe.appliance
+        .toLowerCase()
+        .indexOf(tag.name.toLowerCase());
+      if (applianceMatchTag > -1) {
+        results.push(recipe);
+      }
     });
-  }
+  });
 
   return results;
 }

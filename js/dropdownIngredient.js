@@ -1,5 +1,5 @@
-import { closeDropdownIngredient } from "./dropdown.js";
-import { renderIngredientsDropdown } from "./interface.js";
+import { displayCloseDropdown, displayDropdown } from "./dropdown.js";
+import { filterDropdown } from "./filter.js";
 
 function getIngredients(recipes) {
   let ingredientByRecipes = [];
@@ -13,26 +13,20 @@ function getIngredients(recipes) {
   return [...new Set(ingredient)];
 }
 
-export function displayIngredientsDropdown(ingredients) {
-  const listBox = document.getElementById("listbox-ingredients");
-  const searchIngredient = document.getElementById("search-ingredients");
-  searchIngredient.style.display = "block";
-  document.getElementById("listbox-nameIngredient").style.display = "none";
-  document.getElementById("dropdownIngredients").style.width = "667px";
-  listBox.innerHTML = renderIngredientsDropdown(ingredients);
-}
-
 export function bindIngredientsDropdownEventListeners(app) {
-  const dropdownIngredients = document.getElementById("listbox-nameIngredient");
+  const dropdownIngredients = document.getElementById(
+    "listboxName-ingredients"
+  );
   const listBox = document.getElementById("listbox-ingredients");
-  const chevron = document.getElementById("chevron1");
+  const chevron = document.getElementById("chevron-ingredients");
 
   dropdownIngredients.addEventListener("click", (e) => {
+    filterDropdown("ingredients");
     const ingredients = getIngredients(app.filteredRecipes);
-    displayIngredientsDropdown(ingredients);
+    displayDropdown("ingredients", ingredients);
   });
   chevron.addEventListener("click", () => {
-    closeDropdownIngredient();
+    displayCloseDropdown("ingredients");
   });
   listBox.addEventListener("click", (e) => {
     if (!e.target.matches("li")) {
@@ -40,6 +34,6 @@ export function bindIngredientsDropdownEventListeners(app) {
     }
     app.toggleTag(e.target.textContent, "ingredients");
 
-    closeDropdownIngredient();
+    displayCloseDropdown("ingredients");
   });
 }

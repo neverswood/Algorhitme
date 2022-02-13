@@ -2,28 +2,22 @@ import { displayRecipes } from "./interface.js";
 import { bindAppliancesDropdownEventListeners } from "./dropdownAppliance.js";
 import { bindIngredientsDropdownEventListeners } from "./dropdownIngredient.js";
 import { bindUtensilsDropdownEventListeners } from "./dropdownUtensil.js";
-import { keyWord } from "./filter.js";
-import { filterUtensil } from "./filter.js";
-import { filterAppliance } from "./filter.js";
-import { filterIngredient } from "./filter.js";
-import {
-  closeDropdownAppliance,
-  closeDropdownIngredient,
-  closeDropdownUtensil,
-} from "./dropdown.js";
+import { bindKeyWordEventListeners } from "./filter.js";
+import { displayCloseDropdown } from "./dropdown.js";
 import App from "./App.js";
 
 function index() {
   const app = new App();
   window.addEventListener("click", (e) => {
-    if (!e.target.matches("#dropdownAppliance *")) {
-      closeDropdownAppliance();
+    if (!e.target.matches("#dropdown-appliances *")) {
+      // closeDropdownAppliance();
+      displayCloseDropdown("appliances");
     }
-    if (!e.target.matches("#dropdownUtensils *")) {
-      closeDropdownUtensil();
+    if (!e.target.matches("#dropdown-utensils *")) {
+      displayCloseDropdown("utensils");
     }
-    if (!e.target.matches("#dropdownIngredients *")) {
-      closeDropdownIngredient();
+    if (!e.target.matches("#dropdown-ingredients *")) {
+      displayCloseDropdown("ingredients");
     }
   });
 
@@ -32,10 +26,7 @@ function index() {
   bindIngredientsDropdownEventListeners(app);
   bindUtensilsDropdownEventListeners(app);
   bindRemoveTagEventListener(app);
-  keyWord(app);
-  filterUtensil();
-  filterAppliance();
-  filterIngredient();
+  bindKeyWordEventListeners(app);
 }
 
 index();

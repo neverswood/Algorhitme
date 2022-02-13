@@ -1,5 +1,5 @@
-import { closeDropdownUtensil } from "./dropdown.js";
-import { renderUtensilsDropdown } from "./interface.js";
+import { displayCloseDropdown, displayDropdown } from "./dropdown.js";
+import { filterDropdown } from "./filter.js";
 
 export function getUtensils(recipes) {
   let ustensilsByRecipes = [];
@@ -8,26 +8,19 @@ export function getUtensils(recipes) {
   return [...new Set(allUstensils)];
 }
 
-function displayUtensilsDropdown(utensils) {
-  const listBox = document.getElementById("listbox-utensils");
-  const searchUtensils = document.getElementById("search-utensils");
-  searchUtensils.style.display = "block";
-  document.getElementById("listbox-nameUtensils").style.display = "none";
-  document.getElementById("dropdownUtensils").style.width = "667px";
-  listBox.innerHTML = renderUtensilsDropdown(utensils);
-}
-
 export function bindUtensilsDropdownEventListeners(app) {
-  const dropdownUtensils = document.getElementById("listbox-nameUtensils");
+  const dropdownUtensils = document.getElementById("listboxName-utensils");
   const listBox = document.getElementById("listbox-utensils");
-  const chevron = document.getElementById("chevron3");
+  const chevron = document.getElementById("chevron-utensils");
 
   dropdownUtensils.addEventListener("click", () => {
+    filterDropdown("utensils");
+
     const utensils = getUtensils(app.filteredRecipes);
-    displayUtensilsDropdown(utensils);
+    displayDropdown("utensils", utensils);
   });
   chevron.addEventListener("click", (e) => {
-    closeDropdownUtensil();
+    displayCloseDropdown("utensils");
   });
   listBox.addEventListener("click", (e) => {
     if (!e.target.matches("li")) {
@@ -35,6 +28,6 @@ export function bindUtensilsDropdownEventListeners(app) {
     }
 
     app.toggleTag(e.target.textContent, "utensils");
-    closeDropdownUtensil();
+    displayCloseDropdown("utensils");
   });
 }
