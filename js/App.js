@@ -16,17 +16,37 @@ export default class App {
       this.filteredRecipes = filterRecipesByKeyword(this.keyword);
     }
 
-    this.filteredRecipes = filterRecipesByTags(
+    this.filteredRecipes = filterRecipesByAppliances(
       this.filteredRecipes,
       this.selectedTags
     );
+    this.filteredRecipes = filterRecipesByUtensils(
+      this.filteredRecipes,
+      this.selectedTags
+    );
+    this.filteredRecipes = filterRecipesByIngredients(
+      this.filteredRecipes,
+      this.selectedTags
+    );
+
     if (this.filteredRecipes.length > 0) {
       displayRecipes(this.filteredRecipes);
     } else {
       const containerRecipe = document.getElementById("container-item");
       containerRecipe.innerHTML =
-        "Aucune recette ne correspond à votre critère... vous pouvez chercher << tarte aux pommes >>,  << poisson >> , etc.";
+        "Aucune recette ne correspond à votre critère... vous pouvez chercher 'tarte aux pommes',  'poisson' , etc.";
     }
+  }
+
+  search(resultsRecipes, tags) {
+    let results = new Set();
+
+    // results = this.searchAllByRequest(request);
+    results = filterRecipesByAppliances(resultsRecipes, tags);
+    //  resultsRecipes = this.searchByUstensile(resultsRecipes, ustensiles);
+    results = filterRecipesByUtensils(resultsRecipes, tags);
+
+    return results;
   }
 
   toggleTag(tag, tagType) {
@@ -88,7 +108,7 @@ function filterRecipesByKeyword(keyword) {
 }
 
 function filterRecipesByTags(recipes, tags) {
-  let results = [];
+  let results = new Set();
   if (tags.length === 0) {
     results = recipes;
   } else {
@@ -104,7 +124,7 @@ function filterRecipesByTags(recipes, tags) {
             .toLowerCase()
             .indexOf(tags[tagsIndex].name.toLowerCase());
           if (ingredientMatchTag > -1) {
-            results.push(recipes[recipesIndex]);
+            results.add(recipes[recipesIndex]);
           }
         }
         for (
@@ -116,19 +136,125 @@ function filterRecipesByTags(recipes, tags) {
             .toLowerCase()
             .indexOf(tags[tagsIndex].name.toLowerCase());
           if (utensilMatchTag > -1) {
-            results.push(recipes[recipesIndex]);
+            results.add(recipes[recipesIndex]);
           }
         }
 
         let applianceMatchTag = recipes[recipesIndex].appliance
           .toLowerCase()
           .indexOf(tags[tagsIndex].name.toLowerCase());
+        console.log("lok", tags[tagsIndex].name);
         if (applianceMatchTag > -1) {
-          results.push(recipes[recipesIndex]);
+          results.add(recipes[recipesIndex]);
         }
       }
     }
   }
+  // console.log("edr", results);
+
+  return results;
+}
+
+function filterRecipesByAppliances(recipes, tags) {
+  let filterTags = [];
+  for (let tagsIndex = 0; tagsIndex < tags.length; ++tagsIndex) {
+    if (tags[tagsIndex].type === "appliance") {
+      filterTags.push(tags[tagsIndex]);
+    }
+  }
+  let results = new Set();
+  if (filterTags.length === 0) {
+    results = recipes;
+  } else {
+    for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
+      for (let tagsIndex = 0; tagsIndex < filterTags.length; ++tagsIndex) {
+        let applianceMatchTag = recipes[recipesIndex].appliance
+          .toLowerCase()
+          .indexOf(filterTags[tagsIndex].name.toLowerCase());
+        if (applianceMatchTag > -1) {
+          results.add(recipes[recipesIndex]);
+        }
+      }
+    }
+  }
+  console.log("edr", results);
+
+  return Array.from(results);
+}
+
+function filterRecipesByUtensils(recipes, tags) {
+  let filterTags = [];
+  for (let tagsIndex = 0; tagsIndex < tags.length; ++tagsIndex) {
+    if (tags[tagsIndex].type === "utensils") {
+      filterTags.push(tags[tagsIndex]);
+    }
+  }
+  let results = new Set();
+  if (filterTags.length === 0) {
+    results = recipes;
+  } else {
+    for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
+      for (let tagsIndex = 0; tagsIndex < filterTags.length; ++tagsIndex) {
+        for (
+          let ustensilsIndex = 0;
+          ustensilsIndex < recipes[recipesIndex].ustensils.length;
+          ++ustensilsIndex
+        ) {
+          let utensilMatchTag = recipes[recipesIndex].ustensils[ustensilsIndex]
+            .toLowerCase()
+            .indexOf(filterTags[tagsIndex].name.toLowerCase());
+          if (utensilMatchTag > -1) {
+            results.add(recipes[recipesIndex]);
+          }
+        }
+      }
+    }
+  }
+  console.log("popipop", results);
+
+  return Array.from(results);
+}
+
+function filterRecipesByIngredients(recipes, tags) {
+  let filterTags = [];
+  for (let tagsIndex = 0; tagsIndex < tags.length; ++tagsIndex) {
+    if (tags[tagsIndex].type === "ingredients") {
+      filterTags.push(tags[tagsIndex]);
+    }
+  }
+  let results = [];
+  if (filterTags.length === 0) {
+    results = recipes;
+  } else {
+    for (let recipesIndex = 0; recipesIndex < recipes.length; recipesIndex++) {
+      let matchAllTags = true;
+
+      for (let tagsIndex = 0; tagsIndex < filterTags.length; ++tagsIndex) {
+        const ingredients = recipes[recipesIndex].ingredients;
+        let ingredientMatchTag = -1;
+        for (
+          let ingredientsIndex = 0;
+          ingredientsIndex < ingredients.length;
+          ingredientsIndex++
+        ) {
+          ingredientMatchTag = ingredients[ingredientsIndex].ingredient
+            .toLowerCase()
+            .indexOf(filterTags[tagsIndex].name.toLowerCase());
+          if (ingredientMatchTag > -1) {
+            break;
+          }
+        }
+        if (ingredientMatchTag === -1) {
+          matchAllTags = false;
+          break;
+        }
+      }
+      if (matchAllTags) {
+        results.push(recipes[recipesIndex]);
+      }
+    }
+  }
+  console.log("edr1", results);
 
   return results;
 }
