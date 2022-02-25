@@ -24,7 +24,7 @@ export default class App {
     } else {
       const containerRecipe = document.getElementById("container-item");
       containerRecipe.innerHTML =
-        "Aucune recette ne correspond à votre critère... vous pouvez chercher << tarte aux pommes >>,  << poisson >> , etc.";
+        "Aucune recette ne correspond à votre critère... vous pouvez chercher ' tarte aux pommes ',  ' poisson ' , etc.";
     }
   }
 
@@ -81,7 +81,7 @@ function filterRecipesByTags(recipes, tags) {
   }
   let results = [];
 
-  recipes.map((recipe) => {
+  recipes.forEach((recipe) => {
     tags.forEach((tag) => {
       const ingredients = recipe.ingredients;
       ingredients.forEach((ingredients) => {
